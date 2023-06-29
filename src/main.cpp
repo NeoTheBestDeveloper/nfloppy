@@ -1,6 +1,7 @@
 #include "game.hpp"
 
-int main(void) {
+int main(void)
+{
     Nfloppy::Game game;
 
     game.start();
