@@ -1,13 +1,13 @@
 project('nfloppy', 'cpp',
   version: '0.0.1',
   meson_version: '>=1.1.0',
+  license: 'MIT',
+  license_files: 'LICENSE',
   default_options: [
-    'warning_level=everything',
     'cpp_std=c++20',
     'buildtype=debug',
-    'optimization=0',
-    'b_lundef=false',
     'default_library=static',
+    'warning_level=everything',
 ])
 
 
@@ -51,7 +51,7 @@ incdir = include_directories('include')
 
 subdir('src')
 
-sdl2_dep = dependency('sdl2')
+sdl2_dep = dependency('sdl2', required: true)
 
 executable('nfloppy', src,
           include_directories: incdir,
