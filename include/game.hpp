@@ -18,12 +18,18 @@ public:
 private:
     SDL_Window* m_window = nullptr;
     SDL_Renderer* m_renderer = nullptr;
+    SDL_Texture* m_background = nullptr;
 
     bool m_is_end = false;
 
     void sdl_init();
-    void step();
+    void load_textures();
+
+    void draw_backgroud();
+
     void render();
+
+    void step();
 };
 
 } // namespace Nfloppy
