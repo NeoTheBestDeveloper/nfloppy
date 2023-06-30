@@ -1,7 +1,12 @@
+subdir('entities')
+subdir('math')
+
 src = files(
-  'bird.cpp',
   'game.cpp',
   'main.cpp',
-  'tube.cpp',
+  'texture.cpp',
   'utils.cpp',
 )
+
+src += entities_src
+src += math_src
