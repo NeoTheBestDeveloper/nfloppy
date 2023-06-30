@@ -3,4 +3,5 @@ src = files(
   'game.cpp',
   'main.cpp',
   'tube.cpp',
+  'utils.cpp',
 )

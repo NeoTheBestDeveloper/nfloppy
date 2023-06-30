@@ -1,4 +1,5 @@
 #include "game.hpp"
+#include "utils.hpp"
 
 using Nfloppy::Game;
 
@@ -12,9 +13,22 @@ void Game::start()
 {
     SDL_Event event;
 
-    while (!(event.type == SDL_QUIT)) {
+    double time_accumulator = 0;
+    double tick_size = 1. / m_ticks_per_sec;
+
+    m_last_update = Utils::double_time();
+
+    while (!(event.type == SDL_QUIT) && m_is_running) {
+        double dt = Utils::double_time() - m_last_update;
+        m_last_update += dt;
+        time_accumulator += dt;
+
+        while (time_accumulator > tick_size) {
+            update(tick_size);
+            time_accumulator -= tick_size;
+        }
+
         render();
-        step();
 
         SDL_PollEvent(&event);
     }
@@ -53,4 +67,4 @@ void Game::render()
     SDL_RenderPresent(m_renderer);
 }
 
-void Game::step() { }
+void Game::update(double dt) { }
