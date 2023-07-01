@@ -51,8 +51,13 @@ incdir = include_directories('include')
 
 subdir('src')
 
-sdl2_dep = dependency('sdl2', required: true)
+cmake = import('cmake')
+
+sdl2 = cmake.subproject('sdl2').dependency('SDL2-static')
+sdl2_ttf = cmake.subproject('sdl2-ttf').dependency('SDL2_ttf')
+sdl2_image = cmake.subproject('sdl2-image').dependency('SDL2_image')
+
 
 executable('nfloppy', src,
           include_directories: incdir,
-          dependencies: sdl2_dep)
+          dependencies: [sdl2, sdl2_ttf, sdl2_image])

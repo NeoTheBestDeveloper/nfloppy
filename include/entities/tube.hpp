@@ -6,7 +6,7 @@ namespace Nfloppy {
 
 namespace Entities {
 
-    class Tube final : Entity { };
+    class Tube final : public Entity { };
 }
 
 }

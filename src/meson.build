@@ -4,7 +4,6 @@ subdir('math')
 src = files(
   'game.cpp',
   'main.cpp',
-  'texture.cpp',
   'utils.cpp',
 )
 

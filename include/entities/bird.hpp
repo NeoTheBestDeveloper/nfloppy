@@ -6,7 +6,7 @@ namespace Nfloppy {
 
 namespace Entities {
 
-    class Bird final : Entity { };
+    class Bird final : public Entity { };
 }
 
 }

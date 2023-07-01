@@ -3,3 +3,6 @@ build_release
 .cache
 subprojects/SFML*
 subprojects/packagecache
+subprojects/sdl2
+subprojects/sdl2-ttf
+subprojects/sdl2-image
