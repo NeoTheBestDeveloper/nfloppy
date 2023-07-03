@@ -11,7 +11,8 @@ namespace Entities {
     class FpsCounter final : public Entity {
 
     public:
-        FpsCounter(Math::Vec2f const& pos, Math::Vec2f const& size);
+        FpsCounter(Math::Vec2f const& pos, Math::Vec2f const& size,
+                   bool is_hidden = true);
 
         void update(double dt, SDL_Renderer*) final;
         bool load_texture(SDL_Renderer* renderer) final;

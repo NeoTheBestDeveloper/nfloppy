@@ -11,7 +11,8 @@ namespace Entities {
 
     class Entity {
     public:
-        Entity(Math::Vec2f const& pos, Math::Vec2f const& size);
+        Entity(Math::Vec2f const& pos, Math::Vec2f const& size,
+               bool hidden = false);
         virtual ~Entity() { }
 
         Entity(Entity const&) = delete;
@@ -26,6 +27,11 @@ namespace Entities {
         void set_velocity(Math::Vec2f const& v);
         void set_acceleration(Math::Vec2f const& a);
 
+        bool is_hidden() const;
+        void hide();
+        void show();
+        void toggle_hide();
+
     protected:
         SDL_Texture* m_texture = nullptr;
         SDL_Rect m_texture_size;
@@ -34,6 +40,8 @@ namespace Entities {
         const Math::Vec2f m_size;
         Math::Vec2f m_velocity = .0;
         Math::Vec2f m_acceleration = .0;
+
+        bool m_is_hidden;
     };
 
 }

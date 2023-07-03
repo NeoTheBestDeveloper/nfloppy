@@ -39,6 +39,7 @@ private:
 
     SDL_Window* m_window = nullptr;
     SDL_Renderer* m_renderer = nullptr;
+    SDL_Event m_event;
 
     double m_last_update = 0.0;
     int32_t m_ticks_per_sec = 100;
@@ -48,6 +49,9 @@ private:
     bool init_sdl();
     void init_entities();
     bool load_textures();
+
+    void input();
+    void handle_keyboard();
 
     void render();
     void update(double dt);
