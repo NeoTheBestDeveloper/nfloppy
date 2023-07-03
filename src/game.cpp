@@ -13,12 +13,13 @@
 
 using Nfloppy::Game;
 using Nfloppy::Entities::Background;
+using Nfloppy::Entities::Base;
 using Nfloppy::Entities::FpsCounter;
 
 // TODO: add Logger.
 // TODO: Add chain pattern.
 Game::Game()
-    : m_entities(2)
+    : m_entities(3)
     , m_event({ 0 })
 {
 
@@ -130,9 +131,12 @@ void Game::init_entities()
                                                  Game::BACKGROUND_SIZE);
 
     // FpsCounter
-    m_entities[1] = std::make_unique<FpsCounter>(Math::Vec2f { 20, .5 },
-                                                 Math::Vec2f { 160, 90 });
+    m_entities[1] = std::make_unique<FpsCounter>(Math::Vec2f { 10, .5 },
+                                                 Math::Vec2f { 80, 45 });
 
+    m_entities[2] = std::make_unique<Base>(
+        Math::Vec2f { .0, Nfloppy::LOGICAL_WINDOW_HEIGHT - 112 },
+        Math::Vec2f { 336, 112 });
     // Bird
 
     // Tubes
