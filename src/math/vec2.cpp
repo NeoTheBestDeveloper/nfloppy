@@ -41,3 +41,5 @@ Vec2f Vec2f::operator*(Vec2f const& lhs)
     y *= lhs.y;
     return *this;
 }
+
+bool Vec2f::operator==(Vec2f const& lhs) { return x == lhs.x and y == lhs.y; }

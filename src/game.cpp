@@ -4,16 +4,19 @@
 
 #include <SDL2/SDL.h>
 #include <SDL_image.h>
+#include <SDL_ttf.h>
 
 #include "entities/entities.hpp"
+#include "font.hpp"
 #include "game.hpp"
 #include "utils.hpp"
 
 using Nfloppy::Game;
 using Nfloppy::Entities::Background;
+using Nfloppy::Entities::FpsCounter;
 
 Game::Game()
-    : m_entities(1)
+    : m_entities(2)
 {
     if (not init_sdl()) {
         m_is_running = false;
@@ -56,10 +59,14 @@ void Game::start()
 Game::~Game()
 {
     free_textures();
+
+    TTF_CloseFont(Nfloppy::SDL_FONT);
     SDL_DestroyRenderer(m_renderer);
     SDL_DestroyWindow(m_window);
+
     SDL_Quit();
     IMG_Quit();
+    TTF_Quit();
 }
 
 // TODO: Set logical size for renderer.
@@ -75,12 +82,25 @@ bool Game::init_sdl()
         return false;
     }
 
+    if (TTF_Init() < 0) {
+        std::cout << "[ERROR] Failed to init sdl_ttf.\n";
+        return false;
+    }
+
+    Nfloppy::SDL_FONT = TTF_OpenFont("./assets/font.ttf", 24);
+
+    if (Nfloppy::SDL_FONT == nullptr) {
+        std::cout << "[ERROR] Failed to load font: " << SDL_GetError()
+                  << ".\n";
+        return false;
+    }
+
     SDL_DisplayMode mode;
     SDL_GetCurrentDisplayMode(0, &mode);
 
     m_window = SDL_CreateWindow("Nfloppy", 0, 0, mode.w, mode.h,
-                                SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE
-                                    | SDL_WINDOW_ALLOW_HIGHDPI);
+                                SDL_WINDOW_OPENGL | SDL_WINDOW_ALLOW_HIGHDPI
+                                    | SDL_WINDOW_FULLSCREEN_DESKTOP);
     if (m_window == nullptr) {
         std::cout << "[ERROR] Failed to create sdl window.\n";
         return false;
@@ -92,6 +112,9 @@ bool Game::init_sdl()
         return false;
     }
 
+    SDL_RenderSetLogicalSize(m_renderer, Nfloppy::LOGICAL_WINDOW_WIDTH,
+                             Nfloppy::LOGICAL_WINDOW_HEIGHT);
+
     std::cout << "[LOG] Sdl init is complete.\n";
     return true;
 }
@@ -101,11 +124,11 @@ void Game::init_entities()
 {
     // Background
     m_entities[0] = std::make_unique<Background>(Math::Vec2f { .0, .0 },
-                                                 Math::Vec2f { .0, .0 });
+                                                 Game::BACKGROUND_SIZE);
 
     // FpsCounter
-    // m_entities[1] = std::make_unique<Entities::FpsCounter>(
-    //     Math::Vec2f { .0, .0 }, Math::Vec2f { .0, .0 });
+    m_entities[1] = std::make_unique<FpsCounter>(Math::Vec2f { 20, .5 },
+                                                 Math::Vec2f { 160, 90 });
 
     // Bird
 
@@ -138,7 +161,7 @@ void Game::render()
 void Game::update(double dt)
 {
     for (size_t i = 0; i < m_entities.size(); ++i) {
-        m_entities[i]->update(dt);
+        m_entities[i]->update(dt, m_renderer);
     }
 }
 

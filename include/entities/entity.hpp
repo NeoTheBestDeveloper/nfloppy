@@ -1,8 +1,5 @@
 #pragma once
 
-#include <iostream>
-#include <string>
-
 #include <SDL2/SDL.h>
 #include <SDL_ttf.h>
 
@@ -24,16 +21,17 @@ namespace Entities {
         virtual bool load_texture(SDL_Renderer* renderer) = 0;
         void free_texture();
 
-        virtual void update(double dt);
+        virtual void update(double dt, SDL_Renderer*);
 
         void set_velocity(Math::Vec2f const& v);
         void set_acceleration(Math::Vec2f const& a);
 
     protected:
         SDL_Texture* m_texture = nullptr;
+        SDL_Rect m_texture_size;
 
         Math::Vec2f m_pos;
-        Math::Vec2f m_size;
+        const Math::Vec2f m_size;
         Math::Vec2f m_velocity = .0;
         Math::Vec2f m_acceleration = .0;
     };

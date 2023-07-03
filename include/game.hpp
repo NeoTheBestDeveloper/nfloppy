@@ -5,6 +5,7 @@
 
 #include <SDL2/SDL.h>
 
+#include "defaults.hpp"
 #include "entities/entities.hpp"
 
 namespace Nfloppy {
@@ -21,6 +22,11 @@ public:
     void start();
 
 private:
+    static inline const Math::Vec2f BACKGROUND_SIZE = {
+        Nfloppy::LOGICAL_WINDOW_WIDTH,
+        Nfloppy::LOGICAL_WINDOW_HEIGHT,
+    };
+
     // TODO: fix these wierd ids.
     // ID:
     // 0 - Background
@@ -28,7 +34,7 @@ private:
     // 2 - Bird
     // 3:N - Tubes
 
-    // TODO: Use areana allocator instead of unique_ptr.
+    // TODO: Use arena allocator instead of unique_ptr.
     std::vector<std::unique_ptr<Entities::Entity>> m_entities;
 
     SDL_Window* m_window = nullptr;

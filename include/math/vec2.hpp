@@ -15,6 +15,7 @@ namespace Math {
         Vec2f operator-(Vec2f const& lhs);
         Vec2f operator*(Vec2f const& lhs);
         Vec2f operator/(Vec2f const& lhs);
+        bool operator==(Vec2f const& lhs);
     };
 
 }
