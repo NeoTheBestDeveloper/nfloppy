@@ -1,11 +1,12 @@
-subdir('entities')
 subdir('math')
+subdir('ui')
+subdir('world')
 
 src = files(
   'game.cpp',
   'main.cpp',
-  'utils.cpp',
 )
 
-src += entities_src
 src += math_src
+src += ui_src
+src += world_src
