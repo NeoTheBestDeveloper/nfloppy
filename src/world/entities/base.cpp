@@ -1,5 +1,3 @@
-#include <iostream>
-
 #include "world/entities/base.hpp"
 
 using Nfloppy::World::Entities::Base;

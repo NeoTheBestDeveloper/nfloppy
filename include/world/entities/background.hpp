@@ -1,7 +1,5 @@
 #pragma once
 
-#include <filesystem>
-
 #include "entity.hpp"
 
 namespace Nfloppy {

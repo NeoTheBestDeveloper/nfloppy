@@ -1,6 +1,3 @@
-#include <format>
-#include <iostream>
-
 #include <SDL2/SDL.h>
 #include <SDL_image.h>
 #include <SDL_ttf.h>
@@ -19,15 +16,6 @@ Game::Game()
 
 void Game::start()
 {
-    m_window.init();
-
-    if (not m_window.valid()) {
-        std::cout << std::format("[ERROR] {}\n", m_window.error());
-        return;
-    }
-
-    std::cout << std::format("[LOG] Window initialization complete.\n");
-
     World::World world(288, 512);
 
     double time_accumulator = 0;

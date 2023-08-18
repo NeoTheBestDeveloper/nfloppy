@@ -1,33 +1,28 @@
-#include <iostream>
-#include <memory>
-
 #include "ui/renderer.hpp"
+#include "common/logger.hpp"
 
+using Nfloppy::Common::Logger;
 using Nfloppy::ui::Renderer;
 
-Renderer::Renderer(const Window* win)
+Renderer::Renderer()
 {
-    m_renderer
-        = SDL_CreateRenderer(win->m_window, -1, SDL_RENDERER_ACCELERATED);
+    Logger& logger = Logger::instance();
+
+    m_renderer = SDL_CreateRenderer(s_win, -1, SDL_RENDERER_ACCELERATED);
 
     if (m_renderer == nullptr) {
-        m_error = "Failed to create sdl renderer.";
-        return;
+        logger.panic("Failed to create sdl renderer.");
     }
 
-    SDL_RenderSetLogicalSize(m_renderer, win->m_logical_width,
-                             win->m_logical_height);
+    SDL_RenderSetLogicalSize(m_renderer, s_logical_width, s_logical_height);
 
-    m_is_valid = true;
+    logger.info("Renderer creation complete.");
 }
 
 SDL_Texture* Renderer::create_texture(SDL_Surface* surf) const
 {
     return SDL_CreateTextureFromSurface(m_renderer, surf);
 }
-
-bool Renderer::valid() const { return m_is_valid; }
-const std::string& Renderer::error() const { return m_error; }
 
 void Renderer::draw(const Texture::Texture& texture) const
 {

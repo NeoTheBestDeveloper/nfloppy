@@ -1,5 +1,4 @@
 #include "world/world.hpp"
-#include "world/entities/bird.hpp"
 
 using Nfloppy::World::World;
 using Nfloppy::World::Entities::Background;

@@ -1,7 +1,6 @@
 #pragma once
 
 #include <SDL2/SDL.h>
-#include <SDL_ttf.h>
 
 #include "math/vec2.hpp"
 #include "ui/texture/texture.hpp"

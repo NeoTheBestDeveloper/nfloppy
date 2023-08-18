@@ -1,5 +1,6 @@
 #pragma once
 
+#include <memory>
 #include <vector>
 
 #include "background.hpp"
@@ -19,7 +20,7 @@ namespace World {
         public:
             using EntityPtr = std::unique_ptr<Entity>;
 
-            Entities(uint64_t entities_count);
+            explicit Entities(uint64_t entities_count);
 
             EntityPtr& operator[](EntityId id)
             {

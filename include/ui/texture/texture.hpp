@@ -1,7 +1,5 @@
 #pragma once
 
-#include <string>
-
 #include <SDL.h>
 
 #include "math/vec2.hpp"
@@ -26,9 +24,6 @@ namespace ui {
             void update_pos(Vec2f new_pos);
             void update_size(Vec2f new_size);
 
-            bool valid() const;
-            const std::string& error() const;
-
             SDL_Texture* sdl_texture() const;
             const SDL_Rect* sdl_rect() const;
 
@@ -37,9 +32,6 @@ namespace ui {
             SDL_Rect m_box;
 
             const EntityId m_id;
-
-            std::string m_error = "";
-            bool m_is_valid = false;
         };
     }
 

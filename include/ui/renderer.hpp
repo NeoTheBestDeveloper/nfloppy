@@ -1,12 +1,8 @@
 #pragma once
 
-#include <string>
-
 #include <SDL.h>
 
-#include "SDL_render.h"
 #include "ui/texture/texture.hpp"
-#include "ui/window.hpp"
 
 namespace Nfloppy {
 
@@ -17,18 +13,22 @@ namespace ui {
     public:
         static const Renderer& instance()
         {
-            static Renderer s_instance(s_win);
+            static Renderer s_instance;
             return s_instance;
         }
 
-        static void init(Window* win) { s_win = win; }
+        static void init(SDL_Window* win, int32_t logical_width,
+                         int32_t logical_height)
+        {
+            s_win = win;
+            s_logical_width = logical_width;
+            s_logical_height = logical_height;
+        }
+
         static void destroy()
         {
             SDL_DestroyRenderer(Renderer::instance().m_renderer);
         }
-
-        bool valid() const;
-        const std::string& error() const;
 
         // Add texture at the buffer.
         void draw(const Texture::Texture&) const;
@@ -42,12 +42,11 @@ namespace ui {
         Renderer& operator=(Renderer const&) = default;
         SDL_Renderer* m_renderer = nullptr;
 
-        inline static Window* s_win = nullptr;
+        inline static SDL_Window* s_win = nullptr;
+        inline static int32_t s_logical_width = 0;
+        inline static int32_t s_logical_height = 0;
 
-        std::string m_error = "";
-        bool m_is_valid = false;
-
-        Renderer(const Window*);
+        Renderer();
     };
 
 }
