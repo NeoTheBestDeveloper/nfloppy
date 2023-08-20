@@ -8,38 +8,13 @@ Vec2f::Vec2f(double a)
 {
 }
 
-Vec2f::Vec2f(double x_, double y_)
-    : x(x_)
-    , y(y_)
+Vec2f::Vec2f(double t_x, double t_y)
+    : x(t_x)
+    , y(t_y)
 {
 }
 
-Vec2f Vec2f::operator+(Vec2f const& lhs)
-{
-    x += lhs.x;
-    y += lhs.y;
-    return *this;
-}
-
-Vec2f Vec2f::operator-(Vec2f const& lhs)
-{
-    x -= lhs.x;
-    y -= lhs.y;
-    return *this;
-}
-
-Vec2f Vec2f::operator/(Vec2f const& lhs)
-{
-    x /= lhs.x;
-    y /= lhs.y;
-    return *this;
-}
-
-Vec2f Vec2f::operator*(Vec2f const& lhs)
-{
-    x *= lhs.x;
-    y *= lhs.y;
-    return *this;
-}
-
-bool Vec2f::operator==(Vec2f const& lhs) { return x == lhs.x and y == lhs.y; }
+Vec2f Vec2f::operator+(Vec2f const& lhs) { return { x + lhs.x, y + lhs.y }; }
+Vec2f Vec2f::operator-(Vec2f const& lhs) { return { x - lhs.x, y - lhs.y }; }
+Vec2f Vec2f::operator*(Vec2f const& lhs) { return { x * lhs.x, y * lhs.y }; }
+Vec2f Vec2f::operator/(Vec2f const& lhs) { return { x / lhs.x, y / lhs.y }; }

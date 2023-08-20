@@ -20,6 +20,9 @@ namespace ui {
             Texture(EntityId id, Vec2f size, Vec2f pos);
             ~Texture();
 
+            Texture(Texture const&) = delete;
+            Texture operator=(Texture const&) = delete;
+
             void load();
             void update_pos(Vec2f new_pos);
             void update_size(Vec2f new_size);

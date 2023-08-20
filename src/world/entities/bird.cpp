@@ -8,4 +8,4 @@ Bird::Bird(EntityId id, Math::Vec2f const& pos, Math::Vec2f const& size)
     m_velocity = { -40, 0 };
 }
 
-void Bird::update(double dt) { }
+void Bird::update(double) { }

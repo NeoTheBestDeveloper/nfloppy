@@ -3,6 +3,8 @@
 #include "entities/entities.hpp"
 #include "world_settings.hpp"
 
+using Nfloppy::World::Entities::EntityPtr;
+
 namespace Nfloppy {
 
 namespace World {
@@ -12,14 +14,19 @@ namespace World {
     public:
         World(const int32_t width, const int32_t height);
 
-        void update(const double dt);
+        World(World const&) = delete;
+        World operator=(World const&) = delete;
 
-        // FIXIT: make private.
-        Entities::Entities m_entities;
+        void update(const double dt);
+        const Entities::Entities& entities() const;
 
     private:
-        // TODO: Use arena allocator instead of unique_ptr.
+        Entities::Entities m_entities;
         const WorldSettings m_settings;
+
+        EntityPtr make_background() const;
+        EntityPtr make_base() const;
+        EntityPtr make_bird() const;
     };
 
 }

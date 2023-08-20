@@ -13,6 +13,6 @@ Entity::Entity(EntityId id, Vec2f const& pos, Vec2f const& size)
 
 const Texture& Entity::texture() const { return m_texture; }
 
-void Entity::update(double dt) { }
+void Entity::update(double) { }
 const Vec2f& Entity::size() const { return m_size; }
 const Vec2f& Entity::pos() const { return m_pos; }

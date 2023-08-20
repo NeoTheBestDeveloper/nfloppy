@@ -1,4 +1,3 @@
-#include <SDL_events.h>
 #include <format>
 
 #include <SDL_image.h>
@@ -46,6 +45,7 @@ Window::Window(const int32_t logical_width, const int32_t logical_height,
     poll_event();
 
     Renderer::init(m_window, logical_width, logical_height);
+    m_timer.start();
 
     logger.info("Window creation complete.");
 }
@@ -63,12 +63,27 @@ Window::~Window()
 void Window::poll_event() { SDL_PollEvent(&m_event); }
 const SDL_Event& Window::event() const { return m_event; }
 
+void Window::toggle_fps() { m_fps_shown = !m_fps_shown; }
+
 void Window::render(const Entities& entities)
 {
     const Renderer& renderer = Renderer::instance();
 
     for (const auto& entity : entities) {
         renderer.draw(entity->texture());
+    }
+
+    m_fps_accum += 1;
+
+    // FIXME: fix logic.
+    if (m_timer.elapsed() - static_cast<double>(m_fps_updated) >= 1.0) {
+        m_fps = m_fps_accum;
+        m_fps_accum = 0;
+        m_fps_updated += 1;
+    }
+
+    if (m_fps_shown) {
+        renderer.draw(std::format("FPS: {}", m_fps), { 10, 5 }, { 70, 50 });
     }
 
     renderer.render();

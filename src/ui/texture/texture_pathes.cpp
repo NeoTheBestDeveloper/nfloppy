@@ -12,8 +12,6 @@ TexturePathes::TexturePathes()
 {
     // TODO: absolute pathes for assets with variables.
     m_pathes[EntityId::BACKGROUND] = "./assets/sprites/background-day.png";
-
     m_pathes[EntityId::BASE] = "./assets/sprites/base.png";
-
     m_pathes[EntityId::BIRD] = "./assets/sprites/bluebird-downflap.png";
 }

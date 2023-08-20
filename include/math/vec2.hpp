@@ -9,13 +9,12 @@ namespace Math {
         double x, y;
 
         Vec2f(double a);
-        Vec2f(double x_, double y_);
+        Vec2f(double t_x, double t_y);
 
         Vec2f operator+(Vec2f const& lhs);
         Vec2f operator-(Vec2f const& lhs);
         Vec2f operator*(Vec2f const& lhs);
         Vec2f operator/(Vec2f const& lhs);
-        bool operator==(Vec2f const& lhs);
     };
 
 }

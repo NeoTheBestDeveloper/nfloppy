@@ -1,5 +1,7 @@
 #pragma once
 
+#include <memory>
+
 #include <SDL2/SDL.h>
 
 #include "math/vec2.hpp"
@@ -38,6 +40,7 @@ namespace World {
             Texture m_texture;
         };
 
+        using EntityPtr = std::unique_ptr<Entity>;
     }
 
 }

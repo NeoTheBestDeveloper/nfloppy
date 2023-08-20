@@ -1,8 +1,14 @@
 #pragma once
 
-#include <SDL.h>
+#include <string>
 
+#include <SDL.h>
+#include <SDL_ttf.h>
+
+#include "math/vec2.hpp"
 #include "ui/texture/texture.hpp"
+
+using Nfloppy::Math::Vec2f;
 
 namespace Nfloppy {
 
@@ -28,10 +34,12 @@ namespace ui {
         static void destroy()
         {
             SDL_DestroyRenderer(Renderer::instance().m_renderer);
+            TTF_CloseFont(s_font);
         }
 
         // Add texture at the buffer.
         void draw(const Texture::Texture&) const;
+        void draw(const std::string& msg, Vec2f pos, Vec2f size) const;
 
         // Put buffet at the screen.
         void render() const;
@@ -40,11 +48,14 @@ namespace ui {
 
     private:
         Renderer& operator=(Renderer const&) = default;
-        SDL_Renderer* m_renderer = nullptr;
 
         inline static SDL_Window* s_win = nullptr;
         inline static int32_t s_logical_width = 0;
         inline static int32_t s_logical_height = 0;
+
+        SDL_Renderer* m_renderer = nullptr;
+        inline static TTF_Font* s_font = nullptr;
+        SDL_Color m_color = { 255, 255, 255, 0 };
 
         Renderer();
     };

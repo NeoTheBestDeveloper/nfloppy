@@ -22,11 +22,11 @@ public:
 
 private:
     Window m_window;
-
-    double m_last_update = 0.0;
-    int32_t m_ticks_per_sec = 100;
-
+    double m_elapsed;
+    int32_t m_ticks_per_sec = 80;
     bool m_is_running = true;
+
+    double elapsed() const;
 
     void input();
     void handle_keyboard();
