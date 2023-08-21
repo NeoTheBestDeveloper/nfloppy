@@ -3,16 +3,11 @@
 
 using Nfloppy::World::Entities::Entity;
 
-Entity::Entity(EntityId id, Vec2f const& pos, Vec2f const& size)
+Entity::Entity(EntityId, Vec2f const& pos, Vec2f const& size)
     : m_pos(pos)
     , m_size(size)
-    , m_texture(id, size, pos)
 {
-    m_texture.load();
 }
 
-const Texture& Entity::texture() const { return m_texture; }
-
-void Entity::update(double) { }
-const Vec2f& Entity::size() const { return m_size; }
-const Vec2f& Entity::pos() const { return m_pos; }
+Vec2f const& Entity::size() const { return m_size; }
+Vec2f const& Entity::pos() const { return m_pos; }

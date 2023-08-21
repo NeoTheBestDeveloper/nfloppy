@@ -14,27 +14,24 @@ namespace ui {
 
     namespace Texture {
 
-        class Texture final {
+        class Texture {
 
         public:
-            Texture(EntityId id, Vec2f size, Vec2f pos);
-            ~Texture();
-
+            Texture(EntityId id, Vec2f const& pos, Vec2f const& size);
+            Texture(Texture&& texture) = default;
             Texture(Texture const&) = delete;
-            Texture operator=(Texture const&) = delete;
+            virtual ~Texture() { }
 
-            void load();
-            void update_pos(Vec2f new_pos);
-            void update_size(Vec2f new_size);
+            void update_pos(Vec2f const& new_pos);
 
             SDL_Texture* sdl_texture() const;
             const SDL_Rect* sdl_rect() const;
 
-        private:
+        protected:
             SDL_Texture* m_texture = nullptr;
             SDL_Rect m_box;
 
-            const EntityId m_id;
+            virtual void load(EntityId id) = 0;
         };
     }
 

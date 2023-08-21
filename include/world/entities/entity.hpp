@@ -25,19 +25,17 @@ namespace World {
             Entity(Entity const&) = delete;
             Entity const& operator=(Entity const&) = delete;
 
-            virtual void update(double dt);
+            virtual void update(double dt) = 0;
+            virtual Texture const& texture() const = 0;
 
-            const Vec2f& size() const;
-            const Vec2f& pos() const;
-            const Texture& texture() const;
+            Vec2f const& size() const;
+            Vec2f const& pos() const;
 
         protected:
             Vec2f m_pos;
-            const Vec2f m_size;
+            Vec2f m_size;
             Vec2f m_velocity = .0;
             Vec2f m_acceleration = .0;
-
-            Texture m_texture;
         };
 
         using EntityPtr = std::unique_ptr<Entity>;

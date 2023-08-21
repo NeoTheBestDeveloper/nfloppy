@@ -4,9 +4,12 @@ using Nfloppy::World::Entities::Base;
 
 Base::Base(EntityId id, Vec2f const& pos, Vec2f const& size)
     : Entity(id, pos, size)
+    , m_texture(id, pos, size)
 {
     m_velocity = { -40, 0 };
 }
+
+Texture const& Base::texture() const { return m_texture; }
 
 void Base::update(double dt)
 {
