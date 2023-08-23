@@ -6,7 +6,7 @@ Base::Base(EntityId id, Vec2f const& pos, Vec2f const& size)
     : Entity(id, pos, size)
     , m_texture(id, pos, size)
 {
-    m_velocity = { -40, 0 };
+    m_velocity = { -80, 0 };
 }
 
 Texture const& Base::texture() const { return m_texture; }

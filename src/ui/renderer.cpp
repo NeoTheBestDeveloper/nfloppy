@@ -41,7 +41,8 @@ void Renderer::draw(const Texture::Texture& texture) const
                    texture.sdl_rect());
 }
 
-void Renderer::draw(const std::string& msg, Vec2f pos, Vec2f size) const
+void Renderer::draw(std::string const& msg, Vec2f const& pos,
+                    Vec2f const& size) const
 {
     SDL_Surface* msg_surface
         = TTF_RenderText_Solid(s_font, msg.c_str(), m_color);
@@ -62,3 +63,21 @@ void Renderer::draw(const std::string& msg, Vec2f pos, Vec2f size) const
 }
 
 void Renderer::render() const { SDL_RenderPresent(m_renderer); }
+
+SDL_Texture* Renderer::rotate_texture(SDL_Texture* texture, double angle) const
+{
+    int32_t width, heigth;
+    SDL_QueryTexture(texture, nullptr, nullptr, &width, &heigth);
+
+    SDL_Texture* result
+        = SDL_CreateTexture(m_renderer, SDL_PIXELFORMAT_RGBA4444,
+                            SDL_TEXTUREACCESS_TARGET, width, heigth);
+    SDL_SetTextureBlendMode(result, SDL_BLENDMODE_BLEND);
+    SDL_SetRenderTarget(m_renderer, result);
+
+    SDL_RenderCopyEx(m_renderer, texture, nullptr, nullptr, angle, nullptr,
+                     SDL_FLIP_NONE);
+    SDL_SetRenderTarget(m_renderer, nullptr);
+
+    return result;
+}

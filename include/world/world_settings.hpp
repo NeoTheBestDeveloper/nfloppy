@@ -27,6 +27,12 @@ namespace World {
 
         const Vec2f BIRD_POS;
         const Vec2f BIRD_SIZE;
+
+        const Vec2f PIPE_POS;
+        const Vec2f PIPE_SIZE;
+
+        const double PIPE_SPACING;
+        const double PIPE_HOLE;
     };
 
 }

@@ -8,17 +8,17 @@ namespace World {
 
         enum class EntityId {
             BACKGROUND = 0,
-            BASE = 1,
 
-            BIRD = 2,
+            BIRD = 1,
 
-            SHOWN_TUBE_UP_1 = 3,
-            SHOWN_TUBE_DOWN_1 = 4,
-            SHOWN_TUBE_UP_2 = 5,
-            SHOWN_TUBE_DOWN_2 = 6,
+            TUBE_1_UP = 2,
+            TUBE_1_DOWN = 3,
+            TUBE_2_UP = 4,
+            TUBE_2_DOWN = 5,
+            TUBE_3_UP = 6,
+            TUBE_3_DOWN = 7,
 
-            HIDDEN_TUBE_UP = 7,
-            HIDDEN_TUBE_DOWN = 8,
+            BASE = 8,
         };
 
     }

@@ -13,8 +13,8 @@ using Nfloppy::ui::Texture::AnimatedTexture;
 AnimatedTexture::AnimatedTexture(EntityId id, Vec2f const& pos,
                                  Vec2f const& size, double frame_time)
     : Texture(id, pos, size)
+    , m_frame_time(frame_time)
 {
-    m_frame_time = frame_time;
     load(id);
 }
 
@@ -31,11 +31,12 @@ void AnimatedTexture::animate(double dt)
 
     if (m_time_accumulator >= m_frame_time) {
         m_current_frame += 1;
+
         if (m_current_frame == m_frames.size()) {
             m_current_frame = 0;
         }
-        m_texture = m_frames[m_current_frame];
 
+        m_texture = m_frames[m_current_frame];
         m_time_accumulator -= m_frame_time;
     }
 }
@@ -63,4 +64,18 @@ void AnimatedTexture::load(EntityId id)
     }
 
     m_texture = m_frames[0];
+}
+
+void AnimatedTexture::rotate(double angle)
+{
+    Renderer const& renderer = Renderer::instance();
+
+    for (size_t i = 0; i < m_frames.size(); ++i) {
+        SDL_Texture* new_texture = renderer.rotate_texture(m_frames[i], angle);
+        SDL_DestroyTexture(m_frames[i]);
+
+        m_frames[i] = new_texture;
+    }
+
+    m_texture = m_frames[m_current_frame];
 }

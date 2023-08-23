@@ -20,12 +20,12 @@ Texture const& Bird::texture() const { return m_texture; }
 
 void Bird::update(double dt)
 {
-    m_texture.animate(dt);
     m_pos = m_pos + m_velocity * dt;
 
-    m_texture.update_pos(m_pos);
-
-    if (abs(m_base_y - m_pos.y) >= 6) {
+    if (abs(m_base_y - m_pos.y) >= 5) {
         m_velocity.y = -m_velocity.y;
     }
+
+    m_texture.update_pos(m_pos);
+    m_texture.animate(dt);
 }

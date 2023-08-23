@@ -26,6 +26,7 @@ namespace ui {
             ~AnimatedTexture();
 
             void animate(double dt);
+            void rotate(double angle) final;
 
         private:
             void load(EntityId id) final;

@@ -23,6 +23,7 @@ namespace ui {
             virtual ~Texture() { }
 
             void update_pos(Vec2f const& new_pos);
+            virtual void rotate(double angle) = 0;
 
             SDL_Texture* sdl_texture() const;
             const SDL_Rect* sdl_rect() const;

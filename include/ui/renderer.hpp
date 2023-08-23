@@ -38,13 +38,15 @@ namespace ui {
         }
 
         // Add texture at the buffer.
-        void draw(const Texture::Texture&) const;
-        void draw(const std::string& msg, Vec2f pos, Vec2f size) const;
+        void draw(Texture::Texture const&) const;
+        void draw(std::string const& msg, Vec2f const& pos,
+                  Vec2f const& size) const;
 
         // Put buffet at the screen.
         void render() const;
 
         SDL_Texture* create_texture(SDL_Surface*) const;
+        SDL_Texture* rotate_texture(SDL_Texture*, double angle) const;
 
     private:
         Renderer& operator=(Renderer const&) = default;
@@ -53,9 +55,9 @@ namespace ui {
         inline static int32_t s_logical_width = 0;
         inline static int32_t s_logical_height = 0;
 
-        SDL_Renderer* m_renderer = nullptr;
         inline static TTF_Font* s_font = nullptr;
         SDL_Color m_color = { 255, 255, 255, 0 };
+        SDL_Renderer* m_renderer = nullptr;
 
         Renderer();
     };

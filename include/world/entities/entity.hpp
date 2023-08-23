@@ -27,6 +27,7 @@ namespace World {
 
             virtual void update(double dt) = 0;
             virtual Texture const& texture() const = 0;
+            virtual void set_pos(Vec2f const& new_pos) = 0;
 
             Vec2f const& size() const;
             Vec2f const& pos() const;

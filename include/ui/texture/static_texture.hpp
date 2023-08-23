@@ -21,6 +21,8 @@ namespace ui {
             StaticTexture(EntityId id, Vec2f const& pos, Vec2f const& size);
             ~StaticTexture();
 
+            void rotate(double angle) final;
+
         private:
             void load(EntityId id) final;
         };

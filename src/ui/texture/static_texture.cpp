@@ -3,6 +3,7 @@
 #include <SDL.h>
 #include <SDL_image.h>
 
+#include "SDL_render.h"
 #include "common/logger.hpp"
 #include "ui/renderer.hpp"
 #include "ui/texture/static_texture.hpp"
@@ -37,4 +38,14 @@ void StaticTexture::load(EntityId id)
     m_texture = renderer.create_texture(texture_surf);
 
     SDL_FreeSurface(texture_surf);
+}
+
+void StaticTexture::rotate(double angle)
+{
+    Renderer const& renderer = Renderer::instance();
+
+    SDL_Texture* new_texture = renderer.rotate_texture(m_texture, angle);
+    SDL_DestroyTexture(m_texture);
+
+    m_texture = new_texture;
 }
