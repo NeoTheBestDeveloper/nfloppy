@@ -14,7 +14,10 @@ namespace World {
     class WorldSettings final {
 
     public:
-        WorldSettings(const int32_t width, const int32_t height);
+        WorldSettings();
+
+        const int32_t WORLD_WIDTH = 288;
+        const int32_t WORLD_HEIGHT = 512;
 
         const Vec2f BACKGROUND_POS;
         const Vec2f BACKGROUND_SIZE;

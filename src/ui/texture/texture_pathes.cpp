@@ -9,7 +9,7 @@ const std::vector<path>& TexturePathes::operator[](EntityId id) const
 }
 
 TexturePathes::TexturePathes()
-    : m_pathes(9)
+    : m_pathes(4)
 {
     // TODO: absolute pathes for assets with variables.
     m_pathes[EntityId::BACKGROUND] = { "./assets/sprites/background-day.png" };
@@ -17,11 +17,5 @@ TexturePathes::TexturePathes()
     m_pathes[EntityId::BIRD] = { "./assets/sprites/yellowbird-downflap.png",
                                  "./assets/sprites/yellowbird-midflap.png",
                                  "./assets/sprites/yellowbird-upflap.png" };
-
-    m_pathes[EntityId::TUBE_1_DOWN] = { "./assets/sprites/pipe-green.png" };
-    m_pathes[EntityId::TUBE_1_UP] = { "./assets/sprites/pipe-green.png" };
-    m_pathes[EntityId::TUBE_2_DOWN] = { "./assets/sprites/pipe-green.png" };
-    m_pathes[EntityId::TUBE_2_UP] = { "./assets/sprites/pipe-green.png" };
-    m_pathes[EntityId::TUBE_3_DOWN] = { "./assets/sprites/pipe-green.png" };
-    m_pathes[EntityId::TUBE_3_UP] = { "./assets/sprites/pipe-green.png" };
+    m_pathes[EntityId::PIPE] = { "./assets/sprites/pipe-green.png" };
 }

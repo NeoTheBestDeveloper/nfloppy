@@ -1,10 +1,13 @@
 #include "world/entities/base.hpp"
+#include "world/world_settings.hpp"
 
 using Nfloppy::World::Entities::Base;
 
-Base::Base(EntityId id, Vec2f const& pos, Vec2f const& size)
-    : Entity(id, pos, size)
-    , m_texture(id, pos, size)
+Base::Base()
+    : Entity(EntityId::BASE, WorldSettings().BASE_POS,
+             WorldSettings().BASE_SIZE)
+    , m_texture(EntityId::BASE, WorldSettings().BASE_POS,
+                WorldSettings().BASE_SIZE)
 {
     m_velocity = { -80, 0 };
 }

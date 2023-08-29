@@ -18,10 +18,12 @@ namespace ui {
         class StaticTexture final : public Texture {
 
         public:
+            StaticTexture(Vec2f const& pos, Vec2f const& size);
             StaticTexture(EntityId id, Vec2f const& pos, Vec2f const& size);
             ~StaticTexture();
 
             void rotate(double angle) final;
+            void insert_texture(StaticTexture const&);
 
         private:
             void load(EntityId id) final;

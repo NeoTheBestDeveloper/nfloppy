@@ -11,7 +11,8 @@ Renderer::Renderer()
 {
     Logger& logger = Logger::instance();
 
-    m_renderer = SDL_CreateRenderer(s_win, -1, SDL_RENDERER_ACCELERATED);
+    m_renderer = SDL_CreateRenderer(
+        s_win, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_TARGETTEXTURE);
 
     if (m_renderer == nullptr) {
         logger.panic("Failed to create sdl renderer.");
@@ -62,7 +63,11 @@ void Renderer::draw(std::string const& msg, Vec2f const& pos,
     SDL_DestroyTexture(msg_texture);
 }
 
-void Renderer::render() const { SDL_RenderPresent(m_renderer); }
+void Renderer::render() const
+{
+    SDL_RenderPresent(m_renderer);
+    SDL_RenderClear(m_renderer);
+}
 
 SDL_Texture* Renderer::rotate_texture(SDL_Texture* texture, double angle) const
 {
@@ -80,4 +85,22 @@ SDL_Texture* Renderer::rotate_texture(SDL_Texture* texture, double angle) const
     SDL_SetRenderTarget(m_renderer, nullptr);
 
     return result;
+}
+
+void Renderer::copy_texture(class Texture const& src, class Texture& dst) const
+{
+    SDL_SetRenderTarget(m_renderer, dst.sdl_texture());
+    SDL_RenderCopy(m_renderer, src.sdl_texture(), nullptr, src.sdl_rect());
+
+    SDL_SetRenderTarget(m_renderer, nullptr);
+}
+
+// Create transparant void texture.
+SDL_Texture* Renderer::create_texture(Vec2f const& size) const
+{
+    SDL_Texture* texture = SDL_CreateTexture(
+        m_renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET,
+        static_cast<int>(size.x), static_cast<int>(size.y));
+    SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_BLEND);
+    return texture;
 }

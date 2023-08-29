@@ -9,6 +9,7 @@
 #include "ui/texture/texture.hpp"
 
 using Nfloppy::Math::Vec2f;
+using Nfloppy::ui::Texture::Texture;
 
 namespace Nfloppy {
 
@@ -38,15 +39,22 @@ namespace ui {
         }
 
         // Add texture at the buffer.
-        void draw(Texture::Texture const&) const;
+        void draw(class Texture const&) const;
         void draw(std::string const& msg, Vec2f const& pos,
                   Vec2f const& size) const;
 
         // Put buffet at the screen.
         void render() const;
 
+        // Create void texture.
+        SDL_Texture* create_texture(Vec2f const& size) const;
         SDL_Texture* create_texture(SDL_Surface*) const;
         SDL_Texture* rotate_texture(SDL_Texture*, double angle) const;
+
+        void copy_texture(class Texture const& src, class Texture& dst) const;
+
+        // FIXME: make private.
+        SDL_Renderer* m_renderer = nullptr;
 
     private:
         Renderer& operator=(Renderer const&) = default;
@@ -57,7 +65,6 @@ namespace ui {
 
         inline static TTF_Font* s_font = nullptr;
         SDL_Color m_color = { 255, 255, 255, 0 };
-        SDL_Renderer* m_renderer = nullptr;
 
         Renderer();
     };

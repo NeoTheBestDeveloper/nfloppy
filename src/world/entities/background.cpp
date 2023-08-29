@@ -1,10 +1,13 @@
 #include "world/entities/background.hpp"
+#include "world/world_settings.hpp"
 
 using Nfloppy::World::Entities::Background;
 
-Background::Background(EntityId id, Vec2f const& pos, Vec2f const& size)
-    : Entity(id, pos, size)
-    , m_texture(id, pos, size)
+Background::Background()
+    : Entity(EntityId::BACKGROUND, WorldSettings().BACKGROUND_POS,
+             WorldSettings().BACKGROUND_SIZE)
+    , m_texture(EntityId::BACKGROUND, WorldSettings().BACKGROUND_POS,
+                WorldSettings().BACKGROUND_SIZE)
 {
 }
 

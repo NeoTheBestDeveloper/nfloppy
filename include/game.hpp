@@ -3,8 +3,10 @@
 #include <SDL2/SDL.h>
 
 #include "ui/window.hpp"
+#include "world/world.hpp"
 
 using Nfloppy::ui::Window;
+using Nfloppy::World::World;
 
 // TODO: Rewrite all to modules.
 
@@ -22,6 +24,8 @@ public:
 
 private:
     Window m_window;
+    class World m_world;
+
     int32_t m_ticks_per_sec = 80;
     bool m_is_running = true;
 

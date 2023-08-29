@@ -13,26 +13,17 @@ namespace World {
 
     namespace Entities {
 
-        enum class PipeDirection {
-            UP = 0,
-            DOWN = 1,
-        };
-
         class Pipe final : public Entity {
         public:
-            Pipe(EntityId id, Vec2f const& pos, Vec2f const& size,
-                 PipeDirection direction);
+            explicit Pipe(Vec2f const& pos);
             void update(double dt) final;
             Texture const& texture() const final;
 
-            void set_pos(Vec2f const& new_pos) final
-            {
-                m_pos = new_pos;
-                m_texture.update_pos(new_pos);
-            }
-
         private:
             StaticTexture m_texture;
+
+            double get_bottom_pipe_y(double bottom_pipe_height) const;
+            double get_upper_pipe_y(double bottom_pipe_height) const;
         };
     }
 

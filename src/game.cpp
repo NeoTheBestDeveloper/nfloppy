@@ -11,13 +11,12 @@ using Nfloppy::Game;
 
 Game::Game()
     : m_window(288, 512, "Nfloppy")
+    , m_world(288, 512)
 {
 }
 
 void Game::start()
 {
-    World::World world(288, 512);
-
     double time_accumulator = 0;
     double tick_size = 1. / m_ticks_per_sec;
 
@@ -32,11 +31,11 @@ void Game::start()
         input();
 
         while (time_accumulator >= tick_size) {
-            world.update(tick_size);
+            m_world.update(tick_size);
             time_accumulator -= tick_size;
         }
 
-        m_window.render(world.entities());
+        m_window.render(m_world.entities());
     }
 }
 
@@ -56,5 +55,9 @@ void Game::handle_keyboard()
 {
     if (m_window.event().key.keysym.sym == SDLK_f) {
         m_window.toggle_fps();
+    }
+    else if (m_window.event().key.keysym.sym == SDLK_SPACE) {
+        m_world.activate_bird();
+        m_world.jump_bird();
     }
 }

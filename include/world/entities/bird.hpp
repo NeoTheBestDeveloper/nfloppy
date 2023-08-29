@@ -13,19 +13,17 @@ namespace World {
 
         class Bird final : public Entity {
         public:
-            Bird(EntityId id, Math::Vec2f const& pos, Math::Vec2f const& size);
+            Bird();
             void update(double dt) final;
             Texture const& texture() const final;
 
-            void set_pos(Vec2f const& new_pos) final
-            {
-                m_pos = new_pos;
-                m_texture.update_pos(new_pos);
-            }
+            void activate();
+            void jump();
 
         private:
             AnimatedTexture m_texture;
             const double m_base_y;
+            bool m_active = false;
         };
 
     }

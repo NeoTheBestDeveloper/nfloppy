@@ -3,7 +3,6 @@
 #include <SDL.h>
 #include <SDL_image.h>
 
-#include "SDL_render.h"
 #include "common/logger.hpp"
 #include "ui/renderer.hpp"
 #include "ui/texture/static_texture.hpp"
@@ -12,10 +11,21 @@
 using Nfloppy::Common::Logger;
 using Nfloppy::ui::Texture::StaticTexture;
 
+StaticTexture::StaticTexture(Vec2f const& pos, Vec2f const& size)
+    : Texture(pos, size)
+{
+}
+
 StaticTexture::StaticTexture(EntityId id, Vec2f const& pos, Vec2f const& size)
     : Texture(id, pos, size)
 {
     load(id);
+}
+
+void StaticTexture::insert_texture(StaticTexture const& texture)
+{
+    ui::Renderer const& renderer = ui::Renderer::instance();
+    renderer.copy_texture(texture, *this);
 }
 
 StaticTexture::~StaticTexture() { SDL_DestroyTexture(m_texture); }

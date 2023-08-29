@@ -17,6 +17,7 @@ namespace ui {
         class Texture {
 
         public:
+            Texture(Vec2f const& pos, Vec2f const& size);
             Texture(EntityId id, Vec2f const& pos, Vec2f const& size);
             Texture(Texture&& texture) = default;
             Texture(Texture const&) = delete;
@@ -27,6 +28,8 @@ namespace ui {
 
             SDL_Texture* sdl_texture() const;
             const SDL_Rect* sdl_rect() const;
+
+            void set_sdl_texture(SDL_Texture*);
 
         protected:
             SDL_Texture* m_texture = nullptr;
